@@ -23,7 +23,7 @@
 					<!-- Logo -->
 					<div id="logo">							
 						<h1 id="title">Nattawat Rattanalangkarn</h1>
-						<p>Data Analyst | Project Management | Design Engineer</p>
+						<p>Business Analyst | Project Manager | Senior Design Engineer</p>
 					</div>
 
 					<!-- Nav -->
@@ -31,12 +31,12 @@
 							<ul>
 								<li><a href="index.html#top" id="top-link"><span class="icon solid fa-home">Home</span></a></li>
 								<li><hr class="nav-separator"></li>
-								<li><a href="#Intro" id="Intro-link">Project Introduction</span></a></li>
-								<li><a href="#ask" id="ask-link">Ask</span></a></li>
-								<li><a href="#prepare" id="prepare-link">Prepare</span></a></li>
-								<li><a href="#process" id="process-link">Process</span></a></li>
-								<li><a href="#analyze" id="analyze-link">Analyze</span></a></li>
-								<li><a href="#share_act" id="share_act-link">Share & Act</span></a></li>
+								<li><a href="#Intro" id="Intro-link"><span class="icon solid">Introduction</span></a></li>
+								<li><a href="#ask" id="ask-link"><span class="icon solid">Ask</a></li>
+								<li><a href="#prepare" id="prepare-link"><span class="icon solid">Prepare</span></a></li>
+								<li><a href="#process" id="process-link"><span class="icon solid">Process</span></a></li>
+								<li><a href="#analyze" id="analyze-link"><span class="icon solid">Analyze</span></a></li>
+								<li><a href="#share_act" id="share_act-link"><span class="icon solid">Share & Act</span></a></li>
 
 
 							</ul>
@@ -63,10 +63,11 @@
 					<section id="Intro" class="five dark cover">
 						<div class="container">
 							<header>
-								<h2>Fitness Tracker Usage <br/> 
+								<h2>Analysis: Fitness Tracker Usage <br/> 
 									Trends & Marketing Insight</h2>
 							</header>
-							<p> Practicing project by using open-source data to make a marketing campaign for 'Bellabeat'.<br/>	</p>								
+							<p> Practicing project by using open-source data to make a marketing campaign for 'Bellabeat'.<br/>	
+								(Updated on Jun. 2023)<br/></p>								
 							<p style="font-size: 15px;"> Bellabeat, a high-tech company that manufactures health-focused smart products. Collecting data on <br/>
 								activity, sleep, stress, and reproductive health has allowed Bellabeat 
 								to empower users with knowledge about their own health and habits.</p>	
@@ -131,7 +132,7 @@
 		  </header>
 		  <p style="text-align: left; font-size: 26px;margin-bottom: 0em; "><strong>1. Validate data compatibility across tables:</strong></p> 
 		  <p style="text-align: left; font-size: 20px;margin-bottom: 0em; color:#435353 ;"> After uploading all data tables onto BigQuery, verify data type compatibility across all tables using SQL code, such as the one shown below.</p>
-<pre class="code-container" style="font-size: 14px; "><code class="language-sql line-numbers">SELECT
+<pre class="code-container" style="font-size: 12px; "><code class="language-sql line-numbers">SELECT
 	column_name,
 	table_name,
 	data_type
@@ -180,7 +181,7 @@
 </br>
 <p style="text-align: left; font-size: 26px;margin-bottom: 0em; "><strong>2. Data cleaning and transformation for compatibility to facilitate analysis across tables:</strong></p> 
 <p style="text-align: left; font-size: 20px;margin-bottom: 0em; color:#435353 ;"> 2.1. Separate timestamp data into date and time formats.</p>
-   <pre class="code-container" style="font-size: 14px; "><code class="language-sql line-numbers">SELECT 
+   <pre class="code-container" style="font-size: 12px; "><code class="language-sql line-numbers">SELECT 
 	Id,
 	PARSE_DATE('%m/%d/%Y',SUBSTR(Time,1,9)) AS ActivityDate,
 	PARSE_TIME('%I:%M:%S %p', (SUBSTR(Time,10,21))) AS Activity_Time,
@@ -191,7 +192,7 @@
 </code></pre>
 
    <p style="text-align: left; font-size: 20px;margin-bottom: 0em; color:#435353 ;"> 2.2. Convert different date formats into a universal format.</p>
-   <pre class="code-container" style="font-size: 14px; "><code class="language-sql line-numbers">SELECT  
+   <pre class="code-container" style="font-size: 12px; "><code class="language-sql line-numbers">SELECT  
 	Id,
 	CASE
 	  WHEN REGEXP_CONTAINS(LogDate, r'\d{2}-\d{2}-\d{2}') THEN PARSE_DATE('%m-%d-%y', LogDate)
@@ -214,7 +215,7 @@
 
 <p style="text-align: left; font-size: 26px;margin-bottom: 0em; "><strong>3. Check data integrity:</strong></p> 
 <p style="text-align: left; font-size: 20px;margin-bottom: 0em; color:#435353 ;"> 3.1. Validate the availability of device functions (intensity, heart rate, and sleep) for all participants.</p>
-   <pre class="code-container" style="font-size: 14px; "><code class="language-sql line-numbers">SELECT
+   <pre class="code-container" style="font-size: 12px; "><code class="language-sql line-numbers">SELECT
 	DISTINCT (a.Id) AS User_Id,
 	CASE WHEN a.ActivityDate IS NOT NULL THEN "Available" ELSE "No" END AS DailyIntensity_Function,
 	CASE WHEN b.ActivityDate IS NOT NULL THEN "Available" ELSE "No" END AS HeartRate_Function,
@@ -236,7 +237,7 @@
 </code></pre>
 
 <p style="text-align: left; font-size: 20px;margin-bottom: 0em; color:#435353 ;"> 3.2. Verify the consistency of date records of each user across all functions.</p>
-   <pre class="code-container" style="font-size: 14px; "><code class="language-sql line-numbers">SELECT
+   <pre class="code-container" style="font-size: 12px; "><code class="language-sql line-numbers">SELECT
 	DISTINCT (a.Id) AS User_Id,
 	a.ActivityDate AS Activity_Date,
 	b.ActivityDate AS Heart_Date,
@@ -276,7 +277,7 @@
 						<h2>Analyze</h2>
 					   </header>
 					   <p style="text-align: left; font-size: 26px;margin-bottom: 0em; "><strong>1. Analyze the frequency of user-worn tracker days per month. </strong></p> 
-   <pre class="code-container" style="font-size: 14px; "><code class="language-sql line-numbers">SELECT 
+   <pre class="code-container" style="font-size: 12px; "><code class="language-sql line-numbers">SELECT 
 	Id,
 	Total_Day_Wore
    
@@ -295,7 +296,7 @@
 </code></pre>
 </br>
 <p style="text-align: left; font-size: 26px;margin-bottom: 0em; "><strong>2. Analyze the frequency of user-worn tracker hours per day. </strong></p> 
-<pre class="code-container" style="font-size: 14px; "><code class="language-sql line-numbers">SELECT 
+<pre class="code-container" style="font-size: 12px; "><code class="language-sql line-numbers">SELECT 
 	Id,
 	(Total_Minutes_Wore / Total_Day_Wore)/60 AS AVG_Hour_WorePerDay
    
@@ -313,7 +314,7 @@
 </code></pre>
 </br>
 					   <p style="text-align: left; font-size: 26px;margin-bottom: 0em; "><strong>3. Analyze average distribution of active intensity across each period of the day in a week. </strong></p> 
-   <pre class="code-container" style="font-size: 14px; "><code class="language-sql line-numbers">DECLARE
+   <pre class="code-container" style="font-size: 12px; "><code class="language-sql line-numbers">DECLARE
 	MORNING_START,
 	MORNING_END,
 	AFTERNOON_END,
@@ -358,7 +359,7 @@
 </code></pre>
 </br>
 <p style="text-align: left; font-size: 26px;margin-bottom: 0em; "><strong>4. Analyze heart rate track consistency percentage when wearing compared to intensity trackability (assuming intensity tracking is constant when worn).</strong></p> 
-<pre class="code-container" style="font-size: 14px; "><code class="language-sql line-numbers">WITH  Daily_Minute_WornPerDay AS
+<pre class="code-container" style="font-size: 12px; "><code class="language-sql line-numbers">WITH  Daily_Minute_WornPerDay AS
 	( 
 	  SELECT 
 	   Id, 
@@ -418,7 +419,7 @@
 
 				<!-- Copyright -->
 					<ul class="copyright">
-						<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+						<li>&copy;Nattawat Rattanalangkarn. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
 					</ul>
 
 			</div>
